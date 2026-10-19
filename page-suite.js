@@ -208,12 +208,7 @@ if (locationConnections) {
   const cards = [...locationConnections.querySelectorAll('.location-connection-card')];
   const svg = locationConnections.querySelector('.location-brand-connections');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const tracks = [];
   const paths = cards.slice(1).map(() => {
-    const track = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    track.classList.add('location-connection-track');
-    svg.append(track);
-    tracks.push(track);
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.classList.add('location-connection-progress');
     path.setAttribute('pathLength', '1');
@@ -241,7 +236,6 @@ if (locationConnections) {
           const radius = Math.min(10, (y2 - y1) / 4, (x2 - x1) / 4);
           const route = `M${x1} ${y1} V${mid-radius} Q${x1} ${mid} ${x1+radius} ${mid} H${x2-radius} Q${x2} ${mid} ${x2} ${mid+radius} V${y2}`;
           path.setAttribute('d', route);
-          tracks[index].setAttribute('d', route);
         } else {
           const x1 = a.right - box.left;
           const x2 = b.left - box.left;
@@ -252,19 +246,21 @@ if (locationConnections) {
           const radius = Math.min(18, (x2 - x1) / 4, Math.abs(y2 - y1) / 4);
           const route = `M${x1} ${y1} H${mid-radius} Q${mid} ${y1} ${mid} ${y1+direction*radius} V${y2-direction*radius} Q${mid} ${y2} ${mid+radius} ${y2} H${x2}`;
           path.setAttribute('d', route);
-          tracks[index].setAttribute('d', route);
         }
       });
       layoutNeeded = false;
     }
-    const start = innerHeight * .85;
-    const end = innerHeight * .25;
-    const progress = motion.matches ? 1 : Math.max(0, Math.min(1, (start - box.top) / (box.height + start - end)));
+    const start = innerHeight * .82;
+    const end = innerHeight * .28;
+    const progress = motion.matches ? 1 : Math.max(0, Math.min(1,
+      (start - box.top) / (box.height + start - end)));
+    const scaledProgress = progress * paths.length;
     paths.forEach((path, index) => {
-      path.style.strokeDashoffset = String(1 - Math.max(0, Math.min(1, progress * paths.length - index)));
+      path.style.strokeDashoffset = String(1 - Math.max(0, Math.min(1, scaledProgress - index)));
     });
     cards.forEach((card, index) => {
-      card.classList.toggle('is-connected', index === 0 ? progress > 0 : progress * paths.length >= index);
+      const activationPoint = index === 0 ? 0 : index === cards.length - 1 ? index - 0.7 : index;
+      card.classList.toggle('is-connected', index === 0 ? progress > 0 : scaledProgress >= activationPoint);
     });
   }
 

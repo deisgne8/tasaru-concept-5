@@ -211,7 +211,7 @@
 .inner-page .about-context .context-location-card { border: 0; }
 
 /* One curved brand divider connects the two media contact columns. */
-.inner-page .media-contact-brand::before { top: 72px; bottom: 72px; left: calc(50% - 36px); right: auto; width: 44px; height: auto; border: 0; border-left: 3px solid var(--teal); border-bottom: 3px solid var(--teal); border-radius: 0 0 0 32px; clip-path: inset(0 0 100% 0); transition: clip-path 1.1s cubic-bezier(.22,1,.36,1) .18s; }
+.inner-page .media-contact-brand::before { top: -25px; bottom: 0; left: calc(50% - 50px); right: auto; width: 70px; height: auto; border: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 70 500' preserveAspectRatio='none'%3E%3Cpath d='M2 -4 V350 C2 363 13 374 26 374 H34 C47 374 58 385 58 398 V500' fill='none' stroke='%2306DDC0' stroke-width='3' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E") center / 100% 100% no-repeat; clip-path: inset(0 0 100% 0); transition: clip-path 1.1s cubic-bezier(.22,1,.36,1) .18s; }
 .inner-page .media-contact-brand.section-entered::before { clip-path: inset(0); }
 .inner-page .media-contact-brand::after { content: none; }
 @media(max-width:780px) {
@@ -905,7 +905,7 @@
   display: block;
   height: 400svh;
   min-height: 0;
-  padding: 0;
+  padding: 0 !important;
   overflow: visible;
   background: var(--navy);
 }
@@ -1416,41 +1416,29 @@ body.inner-page.about-page main > #wider-ecosystem.context-story {
 }
 
 /* Supplier page scroll sequence, matching the homepage card activation. */
-.inner-page .supplier-connection-section.scroll-sequence-pinned {
-  height: 400vh;
-  min-height: 0;
-  padding: 0;
-  overflow: visible;
-}
 .supplier-connection-scroll-stage { width: 100%; }
-.supplier-connection-section.scroll-sequence-pinned .supplier-connection-scroll-stage {
-  position: sticky;
-  top: 0;
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(24px,4vh,48px) var(--page);
-}
 .inner-page .supplier-connection-section .supplier-connection > article {
   background-color: #fff !important;
-  background-image: linear-gradient(90deg, var(--cta-primary) 0 var(--signal-progress,0%), #fff var(--signal-progress,0%) 100%) !important;
-  border-color: color-mix(in srgb, #dce2e9 calc(100% - var(--signal-progress,0%)), var(--cta-primary) var(--signal-progress,0%)) !important;
-  box-shadow: 0 12px 32px color-mix(in srgb, rgba(0,23,48,.05) calc(100% - var(--signal-progress,0%)), rgba(44,1,147,.12) var(--signal-progress,0%)) !important;
-  color: color-mix(in srgb, var(--navy) calc(100% - var(--signal-progress,0%)), #fff var(--signal-progress,0%)) !important;
-  transition: none !important;
+  background-image: none !important;
+  transition: background-color .35s ease, border-color .35s ease, box-shadow .35s ease, color .35s ease;
 }
 .inner-page .supplier-connection-section .supplier-connection > article h3,
 .inner-page .supplier-connection-section .supplier-connection > article p {
-  color: color-mix(in srgb, var(--navy) calc(100% - var(--signal-progress,0%)), #fff var(--signal-progress,0%)) !important;
-  transition: none !important;
+  transition: color .35s ease;
 }
-.inner-page .supplier-connection-section .supplier-connection > article p { color: color-mix(in srgb, var(--muted) calc(100% - var(--signal-progress,0%)), #fff var(--signal-progress,0%)) !important; }
-.inner-page .supplier-connection-section .supplier-connection > article.signal-active { color: #fff !important; }
+.inner-page .supplier-connection-section .supplier-connection > article.signal-active { background: var(--cta-primary) !important; border-color: var(--cta-primary) !important; box-shadow: 0 12px 32px rgba(44,1,147,.12) !important; color: #fff !important; }
+.inner-page .supplier-connection-section .supplier-connection > article.signal-active :is(h3,p) { color: #fff !important; }
 .supplier-brand-connections path { transition: none; }
-@media(max-width:780px) {
-  .inner-page .supplier-connection-section.scroll-sequence-pinned { height: auto; padding-block: 48px; }
-  .supplier-connection-section.scroll-sequence-pinned .supplier-connection-scroll-stage { position: static; height: auto; padding: 0; }
+
+/* Location page connection sequence follows normal page scrolling. */
+.inner-page .location-connections .location-connection-card.is-connected {
+  background: var(--cta-primary);
+}
+.inner-page .location-connections .location-connection-card.is-connected :is(h3,p,li) {
+  color: #fff;
+}
+.location-brand-connections path {
+  stroke: #00549b;
 }
 
 /* Consistent vertical spacing across inner-page sections. */

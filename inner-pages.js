@@ -319,15 +319,14 @@ if (locationParallax) {
   queue();
 }
 
-// Suppliers page: pin the three-card connection sequence and activate it with scroll progress.
+// Suppliers page: reveal the connecting route and activate cards with normal page scroll.
 const supplierSequence = document.querySelector('[data-supplier-connection]');
 if (supplierSequence) {
-  const section = supplierSequence.closest('.supplier-connection-section');
   const cards = [...supplierSequence.querySelectorAll('article')];
   const svg = supplierSequence.querySelector('.supplier-brand-connections');
-  if (section && svg && cards.length) {
+  if (svg && cards.length) {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const pinViewport = window.matchMedia('(min-width: 781px)');
+    const wideViewport = window.matchMedia('(min-width: 781px)');
     const paths = Array.from({ length: cards.length + 1 }, () => {
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttribute('pathLength', '1');
@@ -340,7 +339,7 @@ if (supplierSequence) {
 
     function layoutSupplierConnections() {
       const box = supplierSequence.getBoundingClientRect();
-      const vertical = !pinViewport.matches;
+      const vertical = !wideViewport.matches;
       const pad = vertical ? 24 : Math.max(24, box.left);
       svg.setAttribute('viewBox', vertical
         ? `0 -${pad} ${box.width} ${box.height + pad * 2}`
@@ -394,13 +393,10 @@ if (supplierSequence) {
     function drawSupplierProgress() {
       frame = 0;
       if (!laidOut) layoutSupplierConnections();
-      const pinned = section.classList.contains('scroll-sequence-pinned');
-      const bounds = (pinned ? section : supplierSequence).getBoundingClientRect();
+      const bounds = supplierSequence.getBoundingClientRect();
       const start = innerHeight * .82;
       const end = innerHeight * .28;
-      const progress = pinned
-        ? clamp(-bounds.top / Math.max(1, bounds.height - innerHeight))
-        : clamp((start - bounds.top) / (bounds.height + start - end));
+      const progress = motion.matches ? 1 : clamp((start - bounds.top) / (bounds.height + start - end));
       const scaledProgress = progress * paths.length;
       paths.forEach((path, index) => {
         const pathProgress = clamp(scaledProgress - index);
@@ -408,9 +404,8 @@ if (supplierSequence) {
         path.classList.toggle('is-connected', pathProgress >= .999);
       });
       cards.forEach((card, index) => {
-        const cardProgress = clamp(progress * cards.length - index);
-        card.style.setProperty('--signal-progress', `${cardProgress * 100}%`);
-        card.classList.toggle('signal-active', cardProgress >= 1);
+        const activationPoint = index === cards.length - 1 ? index + 0.65 : index + 1;
+        card.classList.toggle('signal-active', scaledProgress >= activationPoint);
       });
     }
 
@@ -421,17 +416,12 @@ if (supplierSequence) {
       laidOut = false;
       queueSupplierProgress();
     }
-    function syncSupplierStage() {
-      section.classList.toggle('scroll-sequence-pinned', !motion.matches && pinViewport.matches);
-      queueSupplierLayout();
-    }
-
     new ResizeObserver(queueSupplierLayout).observe(supplierSequence);
     document.fonts.ready.then(queueSupplierLayout);
     window.addEventListener('scroll', queueSupplierProgress, { passive: true });
     window.addEventListener('resize', queueSupplierLayout);
-    motion.addEventListener('change', syncSupplierStage);
-    pinViewport.addEventListener('change', syncSupplierStage);
-    syncSupplierStage();
+    motion.addEventListener('change', queueSupplierProgress);
+    wideViewport.addEventListener('change', queueSupplierLayout);
+    queueSupplierLayout();
   }
 }

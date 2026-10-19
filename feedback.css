@@ -69,16 +69,13 @@ section[id], article[id] { scroll-margin-top: 112px; }
 .flow-line i { display: none; }
 .network-sequence { position: absolute; top: 50%; height: 1px; z-index: 0; pointer-events: none; background: rgba(0,136,255,.25); }
 .network-sequence i { position: absolute; left: 0; top: 50%; width: 10px; height: 10px; border-radius: 50%; background: #0088ff; box-shadow: 0 0 0 5px rgba(0,136,255,.14),0 0 14px rgba(0,136,255,.4); transform: translate(-50%,-50%); animation: none; }
-.ecosystem-flow article { transition: background-color .55s cubic-bezier(.22,1,.36,1),color .55s cubic-bezier(.22,1,.36,1),border-color .55s cubic-bezier(.22,1,.36,1),box-shadow .55s cubic-bezier(.22,1,.36,1); }
-.ecosystem-flow article > span, .ecosystem-flow article h3, .ecosystem-flow article p { transition: color .55s cubic-bezier(.22,1,.36,1); }
+.ecosystem-flow article { transition: background-color .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease; }
 .ecosystem-flow article.signal-active { color: #fff; background: #0076df !important; border-color: #0076df !important; box-shadow: 0 20px 54px rgba(0,118,223,.2) !important; }
 .ecosystem-flow article.signal-active > span,
 .ecosystem-flow article.signal-active h3,
 .ecosystem-flow article.signal-active p { color: #fff !important; }
 .ecosystem-flow article:hover { transform: none; }
 .ecosystem-core h3 { max-width: 100%; white-space: normal; overflow-wrap: break-word; }
-.ecosystem.scroll-sequence-pinned { height: 400vh; min-height: 0; padding: 0; overflow: visible; }
-.ecosystem.scroll-sequence-pinned .ecosystem-scroll-stage { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(40px,6vh,72px) var(--page); }
 
 /* Concept 2 location: one illustration with matching border overlays. */
 .location-context { position: relative; display: grid; grid-template-columns: minmax(320px,.85fr) minmax(0,1.4fr); align-items: center; min-height: 660px; background: #f6fafb; color: var(--navy); overflow: hidden; }

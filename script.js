@@ -496,11 +496,9 @@ if (platformDiagram) {
 // A continuous bent route reveals behind the cards; arrival activates each card.
 const homepageConnection = document.querySelector('.ecosystem-flow');
 if (homepageConnection) {
-  const homepageEcosystem = homepageConnection.closest('#suppliers');
   const cards = [...homepageConnection.querySelectorAll('article')];
   const svg = homepageConnection.querySelector('.homepage-brand-connections');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const pinViewport = window.matchMedia('(min-width: 781px)');
   const paths = Array.from({length:cards.length+1},()=>{
     const path=document.createElementNS('http://www.w3.org/2000/svg','path');
     path.setAttribute('pathLength','1'); svg.append(path); return path;
@@ -539,20 +537,13 @@ if (homepageConnection) {
   }
   const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
   let connectionFrame = 0;
-  function syncPinnedStage() {
-    homepageEcosystem.classList.toggle('scroll-sequence-pinned', !motion.matches && pinViewport.matches);
-    queueConnectionLayout();
-  }
   function drawConnectionProgress() {
     connectionFrame = 0;
     if (!connectionsLaidOut) layoutConnections();
-    const pinned = homepageEcosystem.classList.contains('scroll-sequence-pinned');
-    const bounds = pinned ? homepageEcosystem.getBoundingClientRect() : homepageConnection.getBoundingClientRect();
+    const bounds = homepageConnection.getBoundingClientRect();
     const start = innerHeight * .82;
     const end = innerHeight * .28;
-    const progress = pinned
-      ? clamp(-bounds.top / Math.max(1, bounds.height - innerHeight))
-      : clamp((start - bounds.top) / (bounds.height + start - end));
+    const progress = motion.matches ? 1 : clamp((start - bounds.top) / (bounds.height + start - end));
     const scaledProgress = progress * paths.length;
     paths.forEach((path, index) => {
       const pathProgress = clamp(scaledProgress - index);
@@ -560,9 +551,8 @@ if (homepageConnection) {
       path.classList.toggle('is-connected', pathProgress >= .999);
     });
     cards.forEach((card, index) => {
-      const cardProgress = clamp(progress * cards.length - index);
-      card.style.setProperty('--signal-progress', `${cardProgress * 100}%`);
-      card.classList.toggle('signal-active', cardProgress >= 1);
+      const activationPoint = index === cards.length - 1 ? index + 0.9 : index + 1;
+      card.classList.toggle('signal-active', scaledProgress >= activationPoint);
     });
   }
   function queueConnectionProgress() {
@@ -576,9 +566,8 @@ if (homepageConnection) {
   document.fonts.ready.then(queueConnectionLayout);
   window.addEventListener('scroll', queueConnectionProgress, { passive: true });
   window.addEventListener('resize', queueConnectionLayout);
-  motion.addEventListener('change', syncPinnedStage);
-  pinViewport.addEventListener('change', syncPinnedStage);
-  syncPinnedStage();
+  motion.addEventListener('change', queueConnectionProgress);
+  queueConnectionLayout();
 }
 
 const searchDialog = document.querySelector('[data-search-dialog]');
