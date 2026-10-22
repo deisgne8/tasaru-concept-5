@@ -1,0 +1,14 @@
+.inner-page .supplier-carousel { position: relative; }
+.supplier-carousel-images { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+.supplier-carousel-images .supplier-carousel-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .55s ease; }
+.supplier-carousel-images .supplier-carousel-slide.is-active { opacity: 1; }
+.supplier-carousel-prev,.supplier-carousel-next { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(0,23,48,.55); color: #fff; font-size: 30px; line-height: 1; cursor: pointer; display: grid; place-items: center; }
+.supplier-carousel-prev { left: 16px; }
+.supplier-carousel-next { right: 16px; }
+.supplier-carousel-dots { position: absolute; z-index: 3; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; }
+.supplier-carousel-dots button { width: 24px; height: 24px; padding: 8px; border: 0; background: transparent; cursor: pointer; }
+.supplier-carousel-dots button::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.45); }
+.supplier-carousel-dots button[aria-pressed='true']::before { background: #06ddc0; }
+.inner-page .supplier-carousel figcaption { bottom: 22px; pointer-events: none; }
+.supplier-carousel :is(button):focus-visible { outline: 2px solid #06ddc0; outline-offset: 3px; }
+@media(prefers-reduced-motion:reduce) { .supplier-carousel-images .supplier-carousel-slide { transition: none; } }

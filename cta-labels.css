@@ -1,0 +1,26 @@
+/* Shared CTA typography and dimensions for every page. */
+body :is(.button,.text-link,.text-link-light,.platform-cta,.foundation-link,.suite-card-link,.contact-explore-cta,.media-text-link,.ecosystem-discover,.ecosystem-hub-link,.supplier-card-cta) {
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+body :is(.button,.platform-cta,.foundation-link,.contact-explore-cta,.ecosystem-discover,.news-all-cta) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  min-height: 48px !important;
+  padding: 12px 24px !important;
+  gap: 10px !important;
+  border-radius: 999px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  max-width: 100%;
+}
+body :is(.button,.text-link,.platform-cta,.foundation-link,.contact-explore-cta,.media-text-link,.ecosystem-discover):focus-visible {
+  outline: 2px solid #087af5;
+  outline-offset: 4px;
+}

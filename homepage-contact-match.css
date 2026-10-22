@@ -1,0 +1,8 @@
+/* Match the landing page contact section. */
+body.inner-page #contact.contact { min-height: 560px; padding: clamp(92px, 9vw, 136px) var(--page); display: grid; place-items: center; background: #fff; color: var(--ink); }
+body.inner-page #contact .contact-content { width: min(100%, 860px); text-align: center; }
+body.inner-page #contact .contact-content > img { width: 240px; max-width: 75%; height: auto; margin: 14px auto 30px; filter: none; }
+body.inner-page #contact h2 { max-width: 780px; margin: 0 auto; color: var(--navy); font-size: var(--type-headline); font-weight: 700; line-height: var(--heading-leading); letter-spacing: 0; }
+body.inner-page #contact .contact-content p { max-width: 540px; margin: 18px auto 30px; font-size: var(--type-paragraph); line-height: var(--body-leading); }
+body.inner-page #contact .contact-content::after { content: none; }
+@media(max-width:600px) { body.inner-page #contact.contact { min-height: 530px; padding: 88px 20px; } }

@@ -1,0 +1,80 @@
+/* Reference layout: editorial introduction and photo beside feature cards. */
+body.inner-page .location-platform-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(36px, 6vw, 96px);
+  align-items: stretch;
+  background: #f5f8fa;
+}
+body.inner-page .location-platform-text .platform-text-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+body.inner-page .location-platform-text h2 {
+  margin: 0 0 22px;
+  font-size: clamp(30px, 2.8vw, 46px);
+  line-height: 1.17;
+}
+body.inner-page .platform-text-intro p {
+  max-width: 53ch;
+  margin: 0 0 32px;
+  color: #526477;
+  font-size: 16px;
+  line-height: 1.65;
+}
+body.inner-page .platform-text-intro .requirements-context-image {
+  display: block;
+  width: clamp(210px, 24vw, 340px);
+  max-width: 100%;
+  height: clamp(190px, 19vw, 260px);
+  margin-top: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+body.inner-page .platform-text-requirements .suite-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+  border: 0;
+}
+body.inner-page .platform-text-requirements .suite-list li,
+body.inner-page .platform-text-requirements .suite-list li:first-child {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid #dce2ea;
+  border-radius: 16px;
+  background: #fff;
+  color: #001730;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+body.inner-page .platform-text-requirements .suite-list li::before { content: none; display: none; }
+.requirements-feature-icon {
+  display: inline-flex;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: #eee8fa;
+  color: #2c0193;
+}
+.requirements-feature-icon svg { display: block; width: 23px; height: 23px; }
+body.inner-page .platform-text-requirements > .button { margin: 0; }
+@media (max-width: 900px) {
+  body.inner-page .location-platform-text { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  body.inner-page .platform-text-intro .requirements-context-image { width: 100%; height: 240px; }
+}
+@media (max-width: 480px) {
+  body.inner-page .platform-text-requirements .suite-list li { padding: 16px; gap: 12px; }
+}

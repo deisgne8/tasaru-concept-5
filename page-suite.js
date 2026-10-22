@@ -29,6 +29,7 @@ if (locationDetailOverview) {
   const currentPlace = places.querySelector('.location-place-card[aria-current="page"]');
   const currentImage = currentPlace.querySelector('img');
   const placeName = currentPlace.querySelector('strong').textContent.trim();
+  if (breadcrumb) {
   const homeItem = document.createElement('li');
   const homeLink = document.createElement('a');
   homeLink.href = 'index.html';
@@ -38,6 +39,8 @@ if (locationDetailOverview) {
   [...breadcrumbList.children].slice(1, -1).forEach(item => item.remove());
   breadcrumbList.prepend(homeItem);
   locationDetailOverview.prepend(breadcrumb);
+
+  }
 
   const figure = document.createElement('figure');
   figure.className = 'location-detail-image';

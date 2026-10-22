@@ -1,0 +1,25 @@
+/* Main subpage headings use the homepage typography scale. */
+body.inner-page {
+  --type-headline: clamp(40px, 4.8vw, 64px);
+  --heading-leading: 1.1;
+  --inner-heading: var(--type-headline);
+}
+body.inner-page main h1 {
+  font-size: clamp(44px, 4.8vw, 66px) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0 !important;
+  white-space: normal !important;
+}
+body.inner-page main h2:not(.media-article h2):not(.media-article-sidebar h2):not(.suite-article-body h2) {
+  font-size: var(--type-headline) !important;
+  font-weight: 700 !important;
+  line-height: var(--heading-leading) !important;
+  letter-spacing: 0 !important;
+  white-space: normal !important;
+  overflow-wrap: normal;
+}
+@media(max-width:780px) {
+  body.inner-page { --type-headline: clamp(34px, 9vw, 44px); }
+  body.inner-page main h1 { font-size: clamp(40px, 10.5vw, 52px) !important; }
+}

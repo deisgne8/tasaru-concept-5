@@ -1,0 +1,107 @@
+/* Subpage spacing corrections; existing colors, imagery and typography retained. */
+body.inner-page { --section-space: clamp(64px,6vw,96px); }
+body.inner-page main > section.inner-section:not(.kaec-context-minimal) { padding-top: var(--section-space) !important; padding-bottom: var(--section-space) !important; }
+body.inner-page main > .page-breadcrumbs { padding-block: 12px; margin: 0; }
+body.inner-page :is(.inner-split,.contact-enquiry,.location-platform-text,.location-infrastructure,.supplier-journey) > * { min-width: 0; }
+body.inner-page :is(.suite-three,.suite-supplier-grid,.wider-platform-grid,.media-related-grid) > * { min-width: 0; }
+body.inner-page .inner-split:not(.suite-scope-panel) { gap: clamp(32px,4vw,64px); align-items: center; }
+body.inner-page .inner-section > p + :is(.suite-three,.suite-destination-grid,.suite-supplier-grid) { margin-top: 32px; }
+body.inner-page .inner-section > :is(.suite-three,.suite-destination-grid,.suite-supplier-grid):last-child { margin-bottom: 0; }
+body.inner-page .suite-story > div { padding: 24px; }
+body.inner-page .suite-story h3 { line-height: 1.25; margin-bottom: 14px; }
+body.inner-page .suite-story p:last-child { margin-bottom: 0; }
+body.inner-page .supplier-capabilities-light .suite-scope-panel { margin-bottom: 0; gap: 0; }
+body.inner-page .supplier-capabilities-light .suite-scope-panel > div > h3 { margin: 0; }
+body.inner-page .supplier-capabilities-light .suite-scope-panel > div > p { margin-bottom: 0; line-height: 1.7; }
+body.inner-page .suite-scope-controls { flex-wrap: wrap; gap: 10px; }
+body.inner-page .about-purpose .purpose-heading { padding-top: 0; }
+body.inner-page .about-purpose .purpose-cards { gap: 20px; }
+body.inner-page .location-detail-overview { min-height: 0 !important; }
+body.inner-page .location-detail-intro > p { margin-bottom: 24px; }
+body.inner-page .location-detail-intro > .button { margin-top: 0; }
+body.inner-page .location-detail-image { align-self: center; }
+body.inner-page .location-platform-text { align-items: start; }
+body.inner-page .platform-text-requirements .suite-list li { line-height: 1.65; }
+body.inner-page .platform-text-requirements .suite-list li:last-child { margin-bottom: 0; }
+body.inner-page .contact-enquiry { gap: clamp(36px,5vw,80px); }
+body.inner-page .contact-inline-form { margin: 0; }
+body.inner-page .contact-inline-form :is(input,select,textarea) { line-height: 1.5; }
+body.inner-page .contact-details-block .suite-email { margin-bottom: 0; }
+body.inner-page .contact-map-heading { margin-bottom: 28px; }
+body.inner-page .contact-map-note { margin-top: 14px; }
+body.inner-page .media-article-layout { padding-top: 56px; padding-bottom: 64px; }
+body.inner-page .media-article > h2:not(:first-child) { margin-top: 32px; }
+body.inner-page .media-article figure { margin-block: 28px; }
+body.inner-page .media-related-heading { align-items: center; }
+body.inner-page .ecosystem-panel-copy { min-width: 0; }
+@media(max-width:1000px) and (min-width:781px) {
+  body.inner-page .contact-enquiry { grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); gap: 32px; }
+}
+@media(max-width:780px) {
+  body.inner-page { --section-space: 48px; }
+  body.inner-page .inner-split:not(.suite-scope-panel) { grid-template-columns: minmax(0,1fr); gap: 28px; }
+  body.inner-page .location-detail-overview { row-gap: 28px; }
+  body.inner-page .location-detail-intro > h2 { margin-bottom: 20px; }
+  body.inner-page .contact-enquiry { gap: 36px; }
+  body.inner-page .contact-inline-form { padding: 24px; }
+  body.inner-page .contact-map-heading { gap: 20px; }
+  body.inner-page .media-article-layout { padding-top: 36px; padding-bottom: 48px; }
+  body.inner-page .media-related-heading { align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+  body.inner-page .supplier-overlay-card figcaption { gap: 16px; padding: 24px; }
+  body.inner-page .location-platform-text h2 { white-space: normal; }
+}
+/* Fit the requested two-line city heading within its text column. */
+body.inner-page .location-detail-intro { container-type: inline-size; }
+body.inner-page.location-detail-page .location-detail-intro h2.kaec-setting-title { font-size: clamp(21px,6.3cqw,40px); }
+/* Final shared typography and alignment refinements. */
+body.inner-page { --body-leading: 1.65; --heading-leading: 1.12; }
+body.inner-page main :is(p,.suite-list) { line-height: 1.65; }
+body.inner-page .inner-section > h2 { margin-bottom: 24px; }
+body.inner-page .inner-section > p { max-width: 68ch; }
+body.inner-page .inner-section > h2 + p { margin-top: 0; }
+body.inner-page .inner-section :is(.inner-card,.suite-dark-card) > p:last-child { margin-bottom: 0; }
+body.inner-page main :is(.button,.ecosystem-discover) { min-height: 48px; padding: 12px 24px; border-radius: 999px; font-size: 14px; font-weight: 600; line-height: 1.4; text-align: center; }
+body.inner-page main .button:focus-visible { outline: 2px solid #087af5; outline-offset: 4px; }
+body.inner-page .suite-scope-panel > div { align-content: center; row-gap: 16px; }
+body.inner-page .supplier-capabilities-light .suite-scope-panel > div > p:not(.eyebrow) { margin-top: 0; }
+body.inner-page .supplier-capabilities-light .suite-scope-panel > div > .button { margin-top: 8px; }
+body.inner-page .contact-inline-form label { line-height: 1.4; }
+body.inner-page .contact-inline-form .form-note { line-height: 1.65; }
+body.inner-page .contact-visit p { margin-bottom: 0; }
+body.inner-page .suite-story { display: flex; flex-direction: column; }
+body.inner-page .suite-story > div { flex: 1; }
+body.inner-page .suite-story > div > p { line-height: 1.65; }
+body.inner-page .media-tags { gap: 8px; }
+body.inner-page .media-share-links { gap: 10px; }
+body.inner-page.location-detail-page .location-detail-intro h2.kaec-setting-title { font-size: clamp(19px,5.4cqw,40px); }
+body.inner-page .location-detail-intro .button { max-width: 100%; }
+body.inner-page .related-news-heading { gap: 24px; }
+body.inner-page .site-footer { overflow-wrap: anywhere; }
+@media(max-width:780px) {
+  body.inner-page .inner-section > h2 { margin-bottom: 20px; }
+  body.inner-page .suite-scope-controls button { min-height: 44px; padding: 10px 16px; }
+  body.inner-page .suite-story > div { padding: 22px; }
+  body.inner-page .related-news-heading { align-items: flex-start; }
+}
+body.inner-page #main .location-detail-overview .location-detail-intro h2.kaec-setting-title { font-size: clamp(19px, 5.4cqw, 40px); }
+
+/* Regular label weight for the location context CTA. */
+body.inner-page #wider-ecosystem .context-story-copy .button { font-weight: 400; }
+
+/* Restore the city overview heading to the shared section-heading scale. */
+body.inner-page #main .location-detail-overview .location-detail-intro h2.kaec-setting-title { font-size: clamp(34px,3.2vw,48px); white-space: normal; line-height: 1.15; }
+@media(max-width:780px) { body.inner-page #main .location-detail-overview .location-detail-intro h2.kaec-setting-title { font-size: clamp(28px,6vw,38px); } }
+/* Keep related-location headings and descriptions together. */
+body.inner-page #main .continue-exploring { row-gap: 0; }
+body.inner-page #main .continue-exploring > div { margin-block: 0; }
+body.inner-page #main .continue-exploring > div:first-child { align-self: end; }
+body.inner-page #main .continue-exploring > div:nth-child(2) { align-self: start; }
+body.inner-page #main .continue-exploring h2 { margin-bottom: 20px; }
+body.inner-page #main .continue-exploring > div:nth-child(2) p { margin-top: 0; margin-bottom: 16px; }
+@media(min-width:781px) { body.inner-page #main .location-detail-overview .location-detail-intro h2.kaec-setting-title { font-size: 47px; } }/* Foundations heading matches the main section heading scale. */
+body.inner-page .about-foundations .foundation-copy h2.foundations-two-line {
+  font-size: var(--type-headline);
+  line-height: var(--heading-leading);
+  white-space: normal;
+  max-width: 100%;
+}

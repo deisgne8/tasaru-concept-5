@@ -1,0 +1,13 @@
+/* Keep the two-tone heading treatment visible in every section. */
+body :is(h1,h2,h3) .text-teal { color: #00cdb5 !important; }
+body :is(h1,h2,h3) .text-purple { color: #2c0193 !important; }
+body :is(.inner-hero,.hero,.inner-dark,.contact,.wider-platform-compact,.supplier-journey-copy) :is(h1,h2,h3) :is(.text-teal,.text-purple) { color: #00cdb5 !important; }
+body .supplier-capabilities-light > h2 .text-teal { color: #2c0193 !important; }
+/* Each brand-colored phrase occupies its own heading line. */
+body :is(h1,h2,h3) :is(.text-teal,.text-purple) {
+  display: block !important;
+}
+/* The block span supplies the line break without adding an empty line. */
+body :is(h1,h2,h3) br:has(+ :is(.text-teal,.text-purple)) {
+  display: none;
+}

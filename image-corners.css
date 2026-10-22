@@ -1,0 +1,5 @@
+/* Shared 20px corners for content photography and image cards. */
+:root { --image-radius: 20px; }
+body main :is(.infrastructure-photo,.suite-profile-image,.suite-destination-feature,.suite-destination-row,.suite-supplier-card,.suite-story,.wider-platform-card,.media-related-card,.platform-foundation,.localization-card,.suite-scope-panel,.contact-map-image) { border-radius: var(--image-radius); overflow: hidden; }
+body main :is(.media-article figure > img,.suite-article-body figure > img,.suite-destination-row > img,.inner-split > figure > img,.suite-scope-panel > figure > img,.suite-story > img,.wider-platform-card > .wider-platform-card-photo,.suite-supplier-card > img) { border-radius: var(--image-radius); }
+body main :is(.suite-profile-image,.infrastructure-photo,.suite-destination-feature,.media-related-card,.platform-foundation,.localization-card) > img { border-radius: inherit; }

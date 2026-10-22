@@ -321,11 +321,25 @@
 }
 
 #about .foundation-link {
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, .85);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 22px;
+  border: 1px solid rgba(255, 255, 255, .85);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .06);
   color: #fff;
   font-size: var(--type-small);
   letter-spacing: .02em;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+#about .platform-foundation:hover .foundation-link,
+#about .platform-foundation:focus-visible .foundation-link {
+  border-color: var(--teal);
+  background: var(--teal);
+  color: var(--navy);
 }
 
 @media (max-width: 800px) {
