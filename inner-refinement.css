@@ -1741,7 +1741,7 @@ body.inner-page main > section.kaec-context-minimal {
 .kaec-context-item:first-child { padding-left: 0; border-left: 0; }
 .kaec-context-item:last-child { padding-right: 0; }
 .inner-page .kaec-context-item h3 { margin: 0 0 16px; font-size: clamp(21px,1.7vw,27px); line-height: 1.25; color: #fff; }
-.inner-page .kaec-context-item h3::before { content: ''; display: block; width: 28px; height: 3px; margin-bottom: 20px; background: #06ddc0; }
+.inner-page .kaec-context-item h3::before { content: none; display: none; }
 .inner-page .kaec-context-item p { margin: 0; font-size: 15px; line-height: 1.7; color: #c4d2de; }
 @media(max-width:780px) {
   body.inner-page main > section.kaec-context-minimal { grid-template-columns: 1fr; padding-block: 40px !important; }

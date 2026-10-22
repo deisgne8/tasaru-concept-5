@@ -1,0 +1,16 @@
+/* Taller cluster context section with a muted automotive backdrop. */
+body.inner-page main > section.cluster-context-background {
+  min-height: 440px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-top: 112px !important;
+  padding-bottom: 112px !important;
+  background: linear-gradient(rgba(0,23,48,.88),rgba(0,23,48,.92)), var(--context-backdrop, url('assets/inner-polished/cluster-preview@2x.webp')) center / cover no-repeat;
+}
+body.inner-page .cluster-context-background .kaec-context-item { border-color: rgba(255,255,255,.24); }
+body.inner-page .cluster-context-background .kaec-context-item p { color: #e0e8ef; }
+@media(max-width:780px) {
+  body.inner-page main > section.cluster-context-background { min-height: 0; padding-top: 60px !important; padding-bottom: 60px !important; }
+}
+
+body.inner-page .cluster-context-background .kaec-context-item h3 { color: #00cdb5; }

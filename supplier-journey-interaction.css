@@ -1,0 +1,17 @@
+/* Hover/focus-controlled manufacturing journey backgrounds. */
+body.inner-page .supplier-journey { position: relative; isolation: isolate; background: #001730; overflow: hidden; }
+.journey-backgrounds { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.journey-backgrounds img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+.journey-backgrounds img.is-active { opacity: 1; }
+.journey-backgrounds::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,rgba(0,23,48,.9),rgba(0,23,48,.78)); }
+body.inner-page .supplier-journey-step { cursor: pointer; border: 1px solid #28465e; background: rgba(12,42,66,.92); transition: background .25s ease,border-color .25s ease,transform .25s ease; }
+body.inner-page .supplier-journey-step .supplier-journey-label { color: #a7bece; }
+body.inner-page .supplier-journey-step.is-active { background: rgba(12,42,66,.92); border-color: #00cdb5; transform: none; }
+body.inner-page .supplier-journey-step.is-active .supplier-journey-label { color: #a7bece; }
+body.inner-page .supplier-journey-step:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+@media(prefers-reduced-motion:reduce) { .journey-backgrounds img,body.inner-page .supplier-journey-step { transition: none; transform: none; } }
+/* Remove the connector behind the journey cards. */
+body.inner-page .supplier-journey-steps::before { content: none; display: none; }
+.journey-autoplay-toggle { justify-self: end; padding: 8px 12px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; background: transparent; color: #fff; font: inherit; font-size: 13px; cursor: pointer; }
+.journey-autoplay-toggle:focus-visible { outline: 2px solid #00cdb5; outline-offset: 3px; }
+.journey-autoplay-toggle[hidden] { display: none; }

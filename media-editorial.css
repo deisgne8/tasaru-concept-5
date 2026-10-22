@@ -50,4 +50,14 @@
 
 .inner-page .media-related-heading > .news-all-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 24px; border-radius: 999px; background: #2c0193; color: #fff; font-size: 14px; line-height: 1.4; text-decoration: none; }
 .inner-page .media-related-heading > .news-all-cta:hover { background: #3b12aa; }
-@media(max-width:600px) { .inner-page .media-related-heading > .news-all-cta { max-width: none; text-align: center; } }
+@media(max-width:600px) { .inner-page .media-related-heading > .news-all-cta { max-width: none; text-align: center; } }/* Visible breadcrumb trail beneath every news article banner. */
+body.inner-page main.news-detail-editorial > nav.page-breadcrumbs {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 16px var(--page);
+  background: #f5f8fa;
+  color: #526477;
+  border-bottom: 1px solid #e2e8ee;
+}
+body.inner-page main.news-detail-editorial > nav.page-breadcrumbs [aria-current='page'] { color: #001730; }

@@ -23,3 +23,19 @@ body.inner-page main h2:not(.media-article h2):not(.media-article-sidebar h2):no
   body.inner-page { --type-headline: clamp(34px, 9vw, 44px); }
   body.inner-page main h1 { font-size: clamp(40px, 10.5vw, 52px) !important; }
 }
+/* Consistent taller banners across all subpages. */
+body.inner-page main > :is(.inner-hero,.media-story-hero) {
+  box-sizing: border-box;
+  min-height: clamp(560px, 43vw, 680px) !important;
+  padding-top: 160px !important;
+  padding-bottom: 60px !important;
+  display: flex;
+  align-items: flex-end !important;
+}
+@media(max-width:780px) {
+  body.inner-page main > :is(.inner-hero,.media-story-hero) {
+    min-height: 510px !important;
+    padding-top: 140px !important;
+    padding-bottom: 48px !important;
+  }
+}

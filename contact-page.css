@@ -108,3 +108,24 @@ body.contact-page .contact-sheet-location > .text-link {
   text-decoration: none;
 }
 body.contact-page .contact-sheet-location > .text-link:hover { background: #2c0193; color: #fff; }
+.contact-enquiry-form { min-width: 0; padding: clamp(24px,3vw,40px); background: #f5f8fa; border: 1px solid #e0e7ed; border-radius: 20px; }
+body.contact-page .contact-enquiry-form h3 { margin: 0 0 14px; font-size: 28px; line-height: 1.2; }
+.contact-enquiry-form .enquiry-note { color: #526477; font-size: 14px; line-height: 1.55; margin: 0 0 20px; }
+.enquiry-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 0 20px; }
+.contact-enquiry-form label { display: block; margin: 0 0 8px; font-size: 14px; color: #001730; }
+.contact-enquiry-form :is(input,select,textarea) { display: block; width: 100%; box-sizing: border-box; margin: 0 0 20px; padding: 12px 14px; min-height: 48px; border: 1px solid #bdcedc; border-radius: 10px; background: #fff; color: #001730; font: inherit; font-size: 16px; }
+.contact-enquiry-form textarea { resize: vertical; }
+.contact-enquiry-form :is(input,select,textarea):focus-visible { outline: 2px solid #2c0193; outline-offset: 2px; }
+.contact-enquiry-form .enquiry-status { margin: 14px 0 0; color: #526477; font-size: 14px; }
+@media(max-width:560px) { .enquiry-fields { grid-template-columns: 1fr; } }
+body.contact-page .contact-intro > h2 { white-space: normal; }
+.contact-address-details { margin-top: 28px; }
+body.contact-page .contact-address-details h3 { margin: 0 0 10px; font-size: 16px; line-height: 1.4; }
+.contact-address-details address { font-style: normal; font-size: 16px; line-height: 1.7; color: #526477; }
+.contact-phone-details { margin-top: 24px; }
+body.contact-page .contact-phone-details h3 { margin: 0 0 8px; font-size: 16px; line-height: 1.4; }
+body.contact-page .contact-phone-details p { margin: 0; color: #526477; }
+.contact-phone-details small { font-size: 12px; }
+.contact-phone-details a { color: #2c0193; }
+body.contact-page .contact-sheet-email { flex-wrap: wrap; }
+body.contact-page .contact-sheet-email > h3 { flex-basis: 100%; margin: 0 0 10px; font-size: var(--inner-card-heading, 28px); line-height: 1.2; }
