@@ -45,7 +45,7 @@ if (heroRoute) {
   document.fonts.ready.then(layoutHeroRoute);
 }
 const guidelineStart = document.querySelector('#about');
-const guidelineSections = [...document.querySelectorAll('main > section, .site-footer')].filter((section) => section.id !== 'suppliers' && (section.id === 'home' || (section.compareDocumentPosition(guidelineStart) & Node.DOCUMENT_POSITION_PRECEDING))).map((section, index) => {
+const guidelineSections = [...document.querySelectorAll('main > section, .site-footer')].filter((section) => section.id !== 'suppliers' && section.id !== 'ceo-message' && (section.id === 'home' || (section.compareDocumentPosition(guidelineStart) & Node.DOCUMENT_POSITION_PRECEDING))).map((section, index) => {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'scroll-guideline');
   svg.setAttribute('aria-hidden', 'true');

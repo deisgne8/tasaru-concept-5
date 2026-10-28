@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="720" viewBox="0 0 600 720">
+  <defs>
+    <linearGradient id="back" x2="1" y2="1"><stop stop-color="#e8edf1"/><stop offset="1" stop-color="#cbd6df"/></linearGradient>
+    <linearGradient id="suit" x2="1" y2="1"><stop stop-color="#32495e"/><stop offset="1" stop-color="#001730"/></linearGradient>
+  </defs>
+  <path fill="url(#back)" d="M0 0h600v720H0z"/>
+  <circle cx="300" cy="255" r="182" fill="#fff" opacity=".28"/>
+  <path d="M0 575 600 100M0 660 600 185" stroke="#fff" stroke-width="1" opacity=".35"/>
+  <path d="M90 720v-128c0-100 86-168 210-168s210 68 210 168v128" fill="url(#suit)"/>
+  <path d="m245 413 55 45 55-45 22 56-77 171-77-171" fill="#f2f5f7"/>
+  <path d="M267 350h66v82l-33 26-33-26" fill="#b7c2cc"/>
+  <ellipse cx="300" cy="264" rx="91" ry="116" fill="#c0cad3"/>
+  <path d="M210 263c-17-100 33-145 91-145 71 0 109 49 90 145l-17-70c-46 12-87-10-112-7l-35 36" fill="#667989"/>
+  <path d="m225 456 75 184-116-115 28-22-24-19Zm150 0-75 184 116-115-28-22 24-19Z" fill="#42596c"/>
+  <path d="m290 464-12 24 13 26-9 84 18 42 18-42-9-84 13-26-12-24" fill="#2b008f"/>
+  <text x="300" y="675" text-anchor="middle" fill="#fff" opacity=".7" font-family="Arial,sans-serif" font-size="12" letter-spacing="3">PORTRAIT PLACEHOLDER</text>
+</svg>
