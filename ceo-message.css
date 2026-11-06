@@ -1,29 +1,72 @@
-.ceo-message {
-  padding: clamp(64px, 7vw, 108px) var(--page);
-  color: var(--navy);
-  background: #f5f7f9;
+/* Match the supplied CEO composition; all desktop measurements scale from 985px. */
+.ceo-message.section { position: relative; isolation: isolate; overflow: hidden; padding: 0; background: #001730; color: #fff; }
+.ceo-message-inner { position: relative; z-index: 1; display: block; width: 100%; max-width: none; height: auto; aspect-ratio: 1916 / 774; margin: 0; }
+.ceo-portrait { position: absolute; top: 16.8%; left: 11.7%; width: 24.85%; aspect-ratio: 1; margin: 0; border: 0; border-radius: 50%; overflow: hidden; background: #fff; }
+/* Reveal the ring only once the drawing reaches the portrait. */
+.ceo-portrait::after { content: ""; position: absolute; inset: 0; z-index: 1; border: 3px solid #00d9c0; border-radius: inherit; opacity: 1; pointer-events: none; }
+.ceo-line-ready:not(.ceo-line-reached-portrait):not(.ceo-line-complete) .ceo-portrait::after { opacity: 0; }
+.ceo-portrait img { position: absolute; top: 0; left: 0; display: block; width: 100%; max-width: none; height: auto; }
+.ceo-message-copy { position: absolute; top: 22.5%; left: 54.62%; width: 32.5%; min-width: 0; }
+.ceo-message-eyebrow { margin: 0 0 1.05vw; color: #00cdb5; text-transform: uppercase; letter-spacing: 0; font-size: .61vw; font-weight: 700; line-height: 1.2; }
+.ceo-message.section h2 { margin: 0 0 1.35vw; color: #fff; font-family: Arial, sans-serif; font-size: 2.92vw; font-weight: 700; line-height: 1.1; letter-spacing: -.025em; }
+.ceo-message h2 .text-teal { display: block; }
+.ceo-quote-mark { position: absolute; top: 1.05vw; left: -5.9vw; color: #00cdb5; font-family: Arial, sans-serif; font-weight: 900; font-size: 7.3vw; line-height: 1; transform: none; }
+.ceo-message blockquote { margin: 0 0 .75vw; padding: 0; border: 0; }
+.ceo-message blockquote p { margin: 0; color: #fff; font-size: 1.22vw; font-weight: 500; line-height: 1.6; }
+.ceo-message-copy > p:not(.ceo-message-eyebrow) { margin: 0 0 .83vw; color: #d7e3ed; font-size: .73vw; line-height: 1.8; }
+.ceo-signature { display: grid; gap: .25vw; margin-top: 1.14vw; padding-top: 1vw; border-top: 1px solid #254052; }
+.ceo-signature strong { color: #fff; font-size: .82vw; font-weight: 700; line-height: 1.4; }
+.ceo-signature span { color: #d7e3ed; font-size: .62vw; line-height: 1.5; }
+.ceo-brand-line { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 1; }
+.ceo-brand-line path { stroke: #00d9c0; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+@media (max-width: 800px) {
+  .ceo-message-inner { display: flex; flex-direction: column; height: auto; aspect-ratio: auto; padding: 44px 26px 0; }
+  .ceo-message-copy { position: relative; inset: auto; width: 100%; padding-left: 34px; order: 0; }
+  .ceo-message-eyebrow { font-size: 10px; margin-bottom: 16px; }
+  .ceo-message.section h2 { font-size: clamp(25px, 6.8vw, 40px); margin-bottom: 20px; }
+  .ceo-quote-mark { top: 24px; left: -6px; font-size: 56px; }
+  .ceo-message blockquote { margin-bottom: 18px; }
+  .ceo-message blockquote p { font-size: 17px; line-height: 1.5; }
+  .ceo-message-copy > p:not(.ceo-message-eyebrow) { font-size: 13px; margin-bottom: 14px; line-height: 1.7; }
+  .ceo-signature { gap: 4px; margin-top: 20px; padding-top: 16px; }
+  .ceo-signature strong { font-size: 14px; }
+  .ceo-signature span { font-size: 11px; }
+  .ceo-portrait { position: relative; inset: auto; width: min(78%, 360px); height: auto; aspect-ratio: 1; margin: 28px auto 40px; overflow: hidden; order: 1; }
+  .ceo-portrait img { width: 100%; }
+  .ceo-brand-line { display: none; }
 }
-.ceo-message-inner {
-  display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-  align-items: center;
-  gap: clamp(40px, 6vw, 96px);
-  max-width: 1280px;
-  margin-inline: auto;
+
+
+
+
+
+
+
+
+/* Draw continuously from the right edge, down the curve, to the left edge. */
+.ceo-line-ready .ceo-brand-line path {
+  vector-effect: none;
+  stroke-width: var(--ceo-line-stroke, 1.5px);
+  stroke-dasharray: var(--ceo-line-length) var(--ceo-line-length);
+  stroke-dashoffset: var(--ceo-line-length);
 }
-.ceo-message-portrait { position: relative; margin: 0; overflow: hidden; border-radius: var(--image-radius, 20px); background: #e5eaf0; }
-.ceo-message-portrait img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 6; object-fit: cover; }
-.ceo-message-copy .ceo-message-eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 22px; color: var(--violet); font-size: 13px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
-.ceo-message-copy h2 { margin: 0 0 26px; font-size: clamp(32px, 3.3vw, 48px); font-weight: 500; line-height: 1.12; letter-spacing: -.025em; }
-.ceo-message-copy h2 span { color: var(--violet); }
-.ceo-message-copy p { max-width: 600px; margin: 0 0 18px; color: #526170; font-size: 16px; line-height: 1.75; }
-.ceo-message-copy .ceo-message-lead { margin-bottom: 22px; color: var(--navy); font-size: clamp(20px, 1.8vw, 25px); line-height: 1.5; }
-.ceo-message-signoff { display: grid; gap: 4px; margin-top: 30px; padding-top: 24px; border-top: 1px solid #d8dfe5; }
-.ceo-message-signoff strong { margin-bottom: 3px; font-size: 18px; font-weight: 500; }
-.ceo-message-signoff span { color: #526170; font-size: 14px; line-height: 1.5; }
-@media (max-width: 720px) {
-  .ceo-message-inner { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .ceo-message-portrait { width: min(100%, 420px); }
-  .ceo-message-portrait img { aspect-ratio: 6 / 5; object-position: center 32%; }
-  .ceo-message-copy .ceo-message-eyebrow { margin-bottom: 18px; font-size: 12px; }
+.ceo-line-drawn .ceo-brand-line path {
+  animation: ceo-line-draw 3s cubic-bezier(.45, 0, .25, 1) forwards;
 }
+@keyframes ceo-line-draw { to { stroke-dashoffset: 0; } }
+/* The completed line is a solid stroke, with no retained dash or clipping. */
+.ceo-line-complete .ceo-brand-line path {
+  animation: none;
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.5;
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ceo-line-ready .ceo-brand-line path {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+}
+

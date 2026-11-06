@@ -45,7 +45,7 @@ if (heroRoute) {
   document.fonts.ready.then(layoutHeroRoute);
 }
 const guidelineStart = document.querySelector('#about');
-const guidelineSections = [...document.querySelectorAll('main > section, .site-footer')].filter((section) => section.id !== 'suppliers' && section.id !== 'ceo-message' && (section.id === 'home' || (section.compareDocumentPosition(guidelineStart) & Node.DOCUMENT_POSITION_PRECEDING))).map((section, index) => {
+const guidelineSections = [...document.querySelectorAll('main > section, .site-footer')].filter((section) => section.id !== 'suppliers' && (section.id === 'home' || (section.compareDocumentPosition(guidelineStart) & Node.DOCUMENT_POSITION_PRECEDING))).map((section, index) => {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', 'scroll-guideline');
   svg.setAttribute('aria-hidden', 'true');
@@ -370,46 +370,116 @@ document.querySelectorAll('[data-supplier-index]').forEach((link) => link.addEve
 window.addEventListener('resize', updateCarousel);
 updateCarousel();
 
-// Keep the supplied map fixed and align the selected highlight to its image.
+// Four nested location views with regional zoom and enhanced site detail.
 const mapButtons = [...document.querySelectorAll('[data-map-index]')];
 const mapCaption = document.querySelector('[data-map-caption]');
-const locationMapImage = document.querySelector('.context-map-art > img');
 const mapViewport = document.querySelector('#location-map');
-const mapHighlight = document.querySelector('.location-area-highlight');
-// These areas describe the illustration, rather than surveyed plot boundaries.
-const locationAreas = [
-  { x: .314, y: .245, width: .15, height: .22 },
-  { x: .467, y: .61, width: .18, height: .22 },
-  { x: .738, y: .555, width: .28, height: .30 },
-  { x: .742, y: .585, width: .085, height: .10 }
+const locationMapImage = document.querySelector('.location-region-image');
+const mapDescriptions = [
+  'Explore the region, then move closer to the Hub.',
+  'The automotive manufacturing cluster within King Abdullah Economic City.',
+  'Masarat Mobility Park, home to TASARU Supplier Hub.',
+  'Five Tier-1 supplier plots within Masarat Mobility Park.'
 ];
-let selectedMapIndex = 2;
-const positionLocationHighlight = () => {
-  const viewportWidth = mapViewport.clientWidth;
-  const viewportHeight = mapViewport.clientHeight;
-  const ratio = 3344 / 1880;
-  const contain = getComputedStyle(locationMapImage).objectFit === 'contain';
-  const imageWidth = contain ? Math.min(viewportWidth, viewportHeight * ratio) : Math.max(viewportWidth, viewportHeight * ratio);
-  const imageHeight = imageWidth / ratio;
-  const offsetX = contain ? (viewportWidth - imageWidth) / 2 : viewportWidth - imageWidth;
-  const offsetY = (viewportHeight - imageHeight) / 2;
-  const area = locationAreas[selectedMapIndex];
-  mapHighlight.style.left = `${offsetX + imageWidth * area.x}px`;
-  mapHighlight.style.top = `${offsetY + imageHeight * area.y}px`;
-  mapHighlight.style.width = `${imageWidth * area.width}px`;
-  mapHighlight.style.height = `${imageHeight * area.height}px`;
+let selectedMapIndex = 0;
+const mapNavigation = { zoom: 1, panX: 0, panY: 0 };
+let mapDrag = null;
+const positionLocationMap = () => {
+  if (!mapViewport || !locationMapImage) return;
+  const width = mapViewport.clientWidth;
+  const height = mapViewport.querySelector('.context-map-art').clientHeight;
+  const imageAspect = 5355 / 2612;
+  const imageWidth = Math.min(width, height * imageAspect);
+  const imageHeight = imageWidth / imageAspect;
+  const siteScale = Math.min(width / (imageWidth * .075), height / (imageHeight * .165)) * .92;
+  const views = [{scale:1.18,x:.49,y:.53},{scale:2.3,x:.35,y:.43},{scale:siteScale * .68,x:.299,y:.501},{scale:siteScale * 1.8,x:.285,y:.466}];
+  const view = views[selectedMapIndex];
+  const scale = view.scale * mapNavigation.zoom;
+  const baseX = width / 2 - ((width-imageWidth)/2+imageWidth*view.x)*scale;
+  const baseY = height / 2 - ((height-imageHeight)/2+imageHeight*view.y)*scale;
+  // Keep some artwork in the viewport even after a long drag.
+  const x = Math.max(width * .2 - width * scale, Math.min(width * .8,
+    baseX + mapNavigation.panX));
+  const y = Math.max(height * .2 - height * scale, Math.min(height * .8,
+    baseY + mapNavigation.panY));
+  mapNavigation.panX = x - baseX;
+  mapNavigation.panY = y - baseY;
+  locationMapImage.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
 };
-const activateMap = (index) => {
+const resetMapNavigation = () => {
+  mapNavigation.zoom = 1;
+  mapNavigation.panX = mapNavigation.panY = 0;
+  mapDrag = null;
+  mapViewport.classList.remove('is-dragging');
+  positionLocationMap();
+};
+const zoomLocationMap = (factor) => {
+  const previousZoom = mapNavigation.zoom;
+  mapNavigation.zoom = Math.max(.65, Math.min(2.5, previousZoom * factor));
+  const ratio = mapNavigation.zoom / previousZoom;
+  mapNavigation.panX *= ratio;
+  mapNavigation.panY *= ratio;
+  positionLocationMap();
+};
+const activateMap = (index, showName = true) => {
+  if (!mapViewport) return;
   selectedMapIndex = index;
+  const placeImages = ["city", "cluster", "masarat", "hub"];
+  locationMapImage.src = showName ? `assets/location-user-map-${placeImages[index]}.svg?v=5` : "assets/location-user-map-transparent.svg?v=4";
+  mapViewport.dataset.mapLevel = String(index);
   mapButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
-  mapHighlight.dataset.area = String(index);
-  mapCaption.textContent = mapButtons[index].textContent.trim();
-  positionLocationHighlight();
+  if (mapCaption) mapCaption.textContent = mapButtons[index].textContent.trim();
+
+
+  resetMapNavigation();
 };
 mapButtons.forEach((button, index) => button.addEventListener('click', () => activateMap(index)));
-new ResizeObserver(positionLocationHighlight).observe(mapViewport);
-locationMapImage.addEventListener('load', positionLocationHighlight);
-activateMap(2);
+if (mapViewport) {
+  mapViewport.addEventListener('dragstart', event => event.preventDefault());
+  mapViewport.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || mapDrag || event.target.closest('button')) return;
+    mapDrag = { id: event.pointerId, x: event.clientX, y: event.clientY,
+      panX: mapNavigation.panX, panY: mapNavigation.panY };
+    mapViewport.classList.add('is-dragging');
+    mapViewport.setPointerCapture(event.pointerId);
+    mapViewport.focus({ preventScroll: true });
+  });
+  mapViewport.addEventListener('pointermove', event => {
+    if (!mapDrag || mapDrag.id !== event.pointerId) return;
+    mapNavigation.panX = mapDrag.panX + event.clientX - mapDrag.x;
+    mapNavigation.panY = mapDrag.panY + event.clientY - mapDrag.y;
+    positionLocationMap();
+  });
+  const finishMapDrag = event => {
+    if (!mapDrag || mapDrag.id !== event.pointerId) return;
+    mapDrag = null;
+    mapViewport.classList.remove('is-dragging');
+    if (mapViewport.hasPointerCapture(event.pointerId)) mapViewport.releasePointerCapture(event.pointerId);
+  };
+  ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => mapViewport.addEventListener(type, finishMapDrag));
+  document.querySelectorAll('[data-map-action]').forEach(button => button.addEventListener('click', () => {
+    const action = button.dataset.mapAction;
+    if (action === 'reset') resetMapNavigation();
+    else zoomLocationMap(action === 'in' ? 1.25 : .8);
+  }));
+  mapViewport.addEventListener('keydown', event => {
+    if (event.target.closest('button')) return;
+    const steps = { ArrowLeft: [60, 0], ArrowRight: [-60, 0], ArrowUp: [0, 60], ArrowDown: [0, -60] };
+    if (steps[event.key]) {
+      event.preventDefault();
+      mapNavigation.panX += steps[event.key][0];
+      mapNavigation.panY += steps[event.key][1];
+      positionLocationMap();
+    } else if (['+', '=', '-', 'Home'].includes(event.key)) {
+      event.preventDefault();
+      if (event.key === 'Home') resetMapNavigation();
+      else zoomLocationMap(event.key === '-' ? .8 : 1.25);
+    }
+  });
+  new ResizeObserver(positionLocationMap).observe(mapViewport);
+  locationMapImage.addEventListener('load', positionLocationMap);
+  activateMap(0, false);
+}
 
 const platformDiagram = document.querySelector('.platform-diagram');
 if (platformDiagram) {
