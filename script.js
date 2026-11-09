@@ -425,7 +425,7 @@ const activateMap = (index, showName = true) => {
   if (!mapViewport) return;
   selectedMapIndex = index;
   const placeImages = ["city", "cluster", "masarat", "hub"];
-  locationMapImage.src = showName ? `assets/location-user-map-${placeImages[index]}.svg?v=5` : "assets/location-user-map-transparent.svg?v=4";
+  locationMapImage.src = showName ? `assets/location-user-map-${placeImages[index]}.svg?v=12` : "assets/location-user-map-transparent.svg?v=12";
   mapViewport.dataset.mapLevel = String(index);
   mapButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
   if (mapCaption) mapCaption.textContent = mapButtons[index].textContent.trim();
